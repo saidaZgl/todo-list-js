@@ -1,6 +1,28 @@
 import "./style.css";
 
+/* <ul>
+    <li>
+        <span class="todo done"></span>
+        <p>text</p>
+        <button>Editer</button>
+        <button>Supprimer</button>
+    </li>
+</ul> */
+
 const ul = document.querySelector("ul");
+
+const form = document.querySelector("form");
+const input = document.querySelector("form > input");
+
+console.log(form, input);
+
+form.addEventListener("submit", (e) => {
+  e.preventDefault();
+  const value = input.value;
+  input.value = " ";
+  addTodo(value);
+  displayTodo();
+});
 
 const todos = [
   {
@@ -9,7 +31,7 @@ const todos = [
   },
   {
     text: "faire du javascript",
-    done: false,
+    done: true,
   },
 ];
 
@@ -26,8 +48,16 @@ const createTodoElement = (todo, index) => {
   li.innerHTML = `
     <span class="todo ${todo.done ? "done" : ""}"></span>
     <p>${todo.text}</p>
+    <button>Supprimer</button>
   `;
   return li;
+};
+
+const addTodo = (text) => {
+  todos.push({
+    text,
+    done: false,
+  });
 };
 
 displayTodo();
