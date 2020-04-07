@@ -57,6 +57,13 @@ li {
     display: flex;
     align-items: center;
     padding: 10px 0px;
+    cursor: pointer;
+}
+
+li:hover {
+    background: #2d98da;
+    border-radius: 5px;
+    padding: 10px 0px 10px 5px;
 }
 
 li input {
