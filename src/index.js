@@ -50,6 +50,7 @@ const createTodoElement = (todo, index) => {
   const buttonDelete = document.createElement("button");
   buttonDelete.innerHTML = "Supprimer";
   buttonDelete.addEventListener("click", (e) => {
+    event.stopPropagation();
     deleteTodo(index);
   });
 
