@@ -97,7 +97,7 @@
 var ___CSS_LOADER_API_IMPORT___ = __webpack_require__(/*! ../node_modules/css-loader/dist/runtime/api.js */ "./node_modules/css-loader/dist/runtime/api.js");
 exports = ___CSS_LOADER_API_IMPORT___(false);
 // Module
-exports.push([module.i, "* body {\n    box-sizing: border-box;\n}\n\nbody {\n    margin: 0;\n    min-height: 100vh;\n    display: flex;\n    align-items: center;\n    justify-content: center;\n}\n\np {\n    margin: 0;\n}\n\n.container {\n    width: 500px;\n    border: 1px solid #eee;\n    border-radius: 3px;\n    padding: 20px;\n    display: flex;\n    flex-direction: column;\n}\n\nform {\n    display: flex;\n    margin-bottom: 20px;\n}\n\nbutton {\n    padding: 5px 15px;\n    border: 0px;\n    border-radius: 5px;\n    cursor: pointer;\n    margin: 0 3px;\n}\n\ninput {\n    padding: 8px 15px;\n    outline: 0;\n    border: 1px solid #ddd;\n    border-radius: 3px;\n}\n\nform input {\n    flex: 1;\n    margin-right: 15px;\n}\n\nul {\n    padding: 0;\n    list-style: none;\n}\n\nli {\n    display: flex;\n    align-items: center;\n}\n\nli p {\n    flex: 1;\n}\n\nli .todo {\n    flex: 0 0 20px;\n    height: 20px;\n    border-radius: 30px;\n    margin-right: 15px;\n    border: 2px solid #333;\n}\n\nli .todo.done {\n    background: #333;\n}", ""]);
+exports.push([module.i, "* body {\n    box-sizing: border-box;\n}\n\nbody {\n    margin: 0;\n    min-height: 100vh;\n    display: flex;\n    align-items: center;\n    justify-content: center;\n}\n\np {\n    margin: 0;\n}\n\n.container {\n    width: 500px;\n    border: 1px solid #eee;\n    border-radius: 3px;\n    padding: 20px;\n    display: flex;\n    flex-direction: column;\n}\n\nform {\n    display: flex;\n    margin-bottom: 20px;\n}\n\nbutton {\n    padding: 5px 15px;\n    border: 0px;\n    border-radius: 5px;\n    cursor: pointer;\n    margin: 0 3px;\n}\n\ninput {\n    padding: 8px 15px;\n    outline: 0;\n    border: 1px solid #ddd;\n    border-radius: 3px;\n}\n\nform input {\n    flex: 1;\n    margin-right: 15px;\n}\n\nul {\n    padding: 0;\n    list-style: none;\n}\n\nli {\n    display: flex;\n    align-items: center;\n    padding: 10px 0px;\n}\n\nli p {\n    flex: 1;\n}\n\nli .todo {\n    flex: 0 0 20px;\n    height: 20px;\n    border-radius: 30px;\n    margin-right: 15px;\n    border: 2px solid #333;\n}\n\nli .todo.done {\n    background: #333;\n}", ""]);
 // Exports
 module.exports = exports;
 
@@ -500,7 +500,76 @@ module.exports = function (list, options) {
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _style_css__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./style.css */ "./src/style.css");
 /* harmony import */ var _style_css__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_style_css__WEBPACK_IMPORTED_MODULE_0__);
+function _toConsumableArray(arr) { return _arrayWithoutHoles(arr) || _iterableToArray(arr) || _unsupportedIterableToArray(arr) || _nonIterableSpread(); }
 
+function _nonIterableSpread() { throw new TypeError("Invalid attempt to spread non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
+
+function _unsupportedIterableToArray(o, minLen) { if (!o) return; if (typeof o === "string") return _arrayLikeToArray(o, minLen); var n = Object.prototype.toString.call(o).slice(8, -1); if (n === "Object" && o.constructor) n = o.constructor.name; if (n === "Map" || n === "Set") return Array.from(n); if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return _arrayLikeToArray(o, minLen); }
+
+function _iterableToArray(iter) { if (typeof Symbol !== "undefined" && Symbol.iterator in Object(iter)) return Array.from(iter); }
+
+function _arrayWithoutHoles(arr) { if (Array.isArray(arr)) return _arrayLikeToArray(arr); }
+
+function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len = arr.length; for (var i = 0, arr2 = new Array(len); i < len; i++) { arr2[i] = arr[i]; } return arr2; }
+
+
+/* 
+<form>
+    <input type="text" />
+    <button>Ajouter</button>
+</form>
+<ul>
+    <li>
+        <span class="todo done"></span>
+        <p>text</p>
+        <button>Editer</button>
+        <button>Supprimer</button>
+    </li>
+</ul> */
+
+var ul = document.querySelector("ul");
+var form = document.querySelector("form");
+var input = document.querySelector("form > input");
+form.addEventListener("submit", function (e) {
+  e.preventDefault();
+  var value = input.value;
+  input.value = " ";
+  addTodo(value);
+  displayTodo();
+});
+var todos = [{
+  text: "je suis une todo",
+  done: false
+}, {
+  text: "faire du javascript",
+  done: true
+}];
+
+var displayTodo = function displayTodo() {
+  var todosNode = todos.map(function (todo, index) {
+    return createTodoElement(todo, index);
+  });
+  ul.innerHTML = "";
+  ul.append.apply(ul, _toConsumableArray(todosNode));
+};
+
+var createTodoElement = function createTodoElement(todo, index) {
+  var li = document.createElement("li");
+  var buttonDelete = document.querySelector("button");
+  buttonDelete.innerHTML = "Supprimer";
+  li.innerHTML = "\n    <span class=\"todo ".concat(todo.done ? "done" : "", "\"></span>\n    <p>").concat(todo.text, "</p>\n    \n  ");
+  li.appendChild(buttonDelete);
+  return li;
+};
+
+var addTodo = function addTodo(text) {
+  todos.push({
+    text: text,
+    done: false
+  });
+};
+
+displayTodo();
 
 /***/ }),
 

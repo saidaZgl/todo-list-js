@@ -1,6 +1,11 @@
 import "./style.css";
 
-/* <ul>
+/* 
+<form>
+    <input type="text" />
+    <button>Ajouter</button>
+</form>
+<ul>
     <li>
         <span class="todo done"></span>
         <p>text</p>
@@ -13,8 +18,6 @@ const ul = document.querySelector("ul");
 
 const form = document.querySelector("form");
 const input = document.querySelector("form > input");
-
-console.log(form, input);
 
 form.addEventListener("submit", (e) => {
   e.preventDefault();
@@ -45,11 +48,17 @@ const displayTodo = () => {
 
 const createTodoElement = (todo, index) => {
   const li = document.createElement("li");
+  const buttonDelete = document.createElement("button");
+  buttonDelete.innerHTML = "Supprimer";
+  buttonDelete.addEventListener("click", (e) => {
+    deleteTodo(index);
+  });
+
   li.innerHTML = `
     <span class="todo ${todo.done ? "done" : ""}"></span>
     <p>${todo.text}</p>
-    <button>Supprimer</button>
   `;
+  li.appendChild(buttonDelete);
   return li;
 };
 
@@ -58,6 +67,11 @@ const addTodo = (text) => {
     text,
     done: false,
   });
+};
+
+const deleteTodo = (index) => {
+  todos.splice(index, 1);
+  displayTodo();
 };
 
 displayTodo();
