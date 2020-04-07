@@ -38,26 +38,40 @@ const displayTodo = () => {
 
 const createTodoElement = (todo, index) => {
   const li = document.createElement("li");
+
   const buttonDelete = document.createElement("button");
   buttonDelete.innerHTML = "Supprimer";
   buttonDelete.classList.add("danger");
+
   const buttonEdit = document.createElement("button");
   buttonEdit.innerHTML = "Edit";
   buttonEdit.classList.add("primary");
+
   buttonDelete.addEventListener("click", (event) => {
     event.stopPropagation();
     deleteTodo(index);
   });
+
   buttonEdit.addEventListener("click", (event) => {
     event.stopPropagation();
     toggleEditMode(index);
   });
+
   li.innerHTML = `
     <span class="todo ${todo.done ? "done" : ""}"></span>
     <p class="${todo.done ? "done" : ""}">${todo.text}</p>
   `;
+
+  let timer;
   li.addEventListener("click", (event) => {
-    toggleTodo(index);
+    if (event.detail === 1) {
+      timer = setTimeout(() => {
+        toggleTodo(index);
+      }, 200);
+    } else if (event.detail > 1) {
+      clearTimeout(timer);
+      toggleEditMode(index);
+    }
   });
   li.append(buttonEdit, buttonDelete);
   return li;
