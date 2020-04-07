@@ -36,6 +36,18 @@ button {
     margin: 0 3px;
 }
 
+button.danger {
+    background: #eb2f06;
+}
+
+button.primary {
+    background: #4a69bd;
+}
+
+button.success {
+    background: #2ed573;
+}
+
 input {
     padding: 8px 15px;
     outline: 0;
@@ -61,7 +73,7 @@ li {
 }
 
 li:hover {
-    background: #2d98da;
+    background: lightblue;
     border-radius: 5px;
     padding: 10px 0px 10px 5px;
 }
