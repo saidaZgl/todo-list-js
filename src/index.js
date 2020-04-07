@@ -106,6 +106,7 @@ const createTodoEditElement = (todo, index) => {
   });
 
   li.append(input, buttonCancel, buttonSave);
+  setTimeout(() => input.focus(), 0);
   return li;
 };
 
