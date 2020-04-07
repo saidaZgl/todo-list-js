@@ -85,7 +85,7 @@ const addTodo = (text) => {
   text = text.trim();
   if (text) {
     todos.push({
-      text,
+      text: `${text[0].toUpperCase()}${text.slice(1)}`,
       done: false,
     });
     displayTodo();
