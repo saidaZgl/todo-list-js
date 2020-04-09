@@ -2,12 +2,12 @@
 
 ### Project setup
 
-npm install
+- npm install
 
 #### Compiles and hot-reloads for development
 
-npm start
+- npm start
 
 #### Compiles and minifies for production
 
-npm run webpack
+- npm run webpack
